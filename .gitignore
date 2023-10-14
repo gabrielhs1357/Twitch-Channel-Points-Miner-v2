@@ -145,7 +145,7 @@ cython_debug/
 chromedriver*
 
 # Folders
-cookies/*
+# cookies/*
 logs/*
 screenshots/*
 htmls/*

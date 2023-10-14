@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+from xmlrpc.client import Boolean
 
 from colorama import Fore
 from dotenv import load_dotenv
@@ -85,7 +86,10 @@ twitch_miner = TwitchChannelPointsMiner(
 
 streamers = os.getenv('CHANNELS').split(',')
     
-twitch_miner.analytics(host="0.0.0.0", port=5000, refresh=5, days_ago=7)   # Start the Analytics web-server
+analytics_enabled = bool(os.getenv('ANALYTICS_ENABLED'))
+
+if analytics_enabled:
+    twitch_miner.analytics(host="0.0.0.0", port=5000, refresh=5, days_ago=7)   # Start the Analytics web-server
 
 twitch_miner.mine(
     streamers,                                  # Array of streamers (order = priority)
