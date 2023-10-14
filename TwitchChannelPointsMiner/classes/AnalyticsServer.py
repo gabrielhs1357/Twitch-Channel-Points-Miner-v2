@@ -153,6 +153,13 @@ def json_all():
         mimetype="application/json",
     )
 
+def ping():
+    return Response(
+        "Ok.",
+        status=200,
+        mimetype="application/json",
+    )
+
 
 def index(refresh=5, days_ago=7):
     return render_template(
@@ -242,6 +249,7 @@ class AnalyticsServer(Thread):
             "/json/<string:streamer>", "json", read_json, methods=["GET"]
         )
         self.app.add_url_rule("/json_all", "json_all", json_all, methods=["GET"])
+        self.app.add_url_rule("/ping", "ping", ping, methods=["GET"])
 
     def run(self):
         logger.info(
